@@ -1,0 +1,8 @@
+[
+  {"execucao": 1, "neuronios": [32], "taxa_aprendizado": 0.01},
+  {"execucao": 2, "neuronios": [64], "taxa_aprendizado": 0.01},
+  {"execucao": 3, "neuronios": [128], "taxa_aprendizado": 0.01},
+  {"execucao": 4, "neuronios": [64, 32], "taxa_aprendizado": 0.01},
+  {"execucao": 5, "neuronios": [64, 32], "taxa_aprendizado": 0.001},
+  {"execucao": 6, "neuronios": [128, 64], "taxa_aprendizado": 0.01}
+]

@@ -1,0 +1,9 @@
+services:
+  mnist:
+    image: ia-mlp-mnist:latest
+    platform: linux/amd64
+    build: .
+    network_mode: none
+    volumes:
+      - ./resultados:/app/resultados
+      - ./configuracoes.json:/app/configuracoes.json:ro

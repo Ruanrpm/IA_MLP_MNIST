@@ -1,0 +1,9 @@
+# Envia ao build apenas o necessario; nao inclui resultados nem o TAR exportado.
+**
+!*.py
+!requirements.txt
+!configuracoes.json
+!tests/
+!tests/*.py
+!dados/
+!dados/mnist.npz

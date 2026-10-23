@@ -1,0 +1,64 @@
+python main.py treinar --camadas 64 32 --taxa 0.01 --epocas 20 --lote 64 --semente 42
+
+
+python main.py experimentos --configuracoes configuracoes.json --epocas 20 --lote 64 --semente 42
+
+python main.py experimentos
+
+python main.py demonstrar --indices 0 1 2 3 4 8
+
+EXECUTAR COM DOCKER (PowerShell no Windows ou terminal no Linux/macOS)
+
+Requisito: Docker com suporte a containers Linux e Docker Compose.
+No Windows/macOS, instale e abra o Docker Desktop antes dos comandos.
+Abra o terminal DENTRO da pasta IA_MLP_MNIST. Nao precisa instalar Python.
+
+1. PREPARAR NESTE PC, COM INTERNET (uma vez ou apos alterar o codigo)
+docker compose build
+
+2. SALVAR A IMAGEM PARA LEVAR A FACULDADE, SEM DEPENDER DE INTERNET
+docker save -o ia-mlp-mnist-linux-amd64.tar ia-mlp-mnist:latest
+
+Copie a pasta do projeto inteira, incluindo o TAR, compose.yaml,
+configuracoes.json e resultados, para o pendrive/PC do seu amigo.
+A imagem leva Python, bibliotecas, codigo e MNIST. O Docker precisa estar
+instalado e funcionando no outro PC antes do uso sem internet.
+
+3. NO PC DO AMIGO, DENTRO DA PASTA COPIADA (uma vez)
+docker load -i ia-mlp-mnist-linux-amd64.tar
+
+4. EXECUTAR OS SEIS EXPERIMENTOS COMPLETOS (15 epocas)
+docker compose run --rm --pull never mnist
+
+Os experimentos usam configuracoes.json; voce pode editar esse arquivo.
+Os JSONs, PNGs e modelos ficam na pasta resultados do PC, mesmo apos sair.
+Aguarde o treinamento terminar antes de executar a demonstracao abaixo.
+
+5. DEMONSTRAR O RECONHECIMENTO COM O MODELO JA TREINADO
+docker compose run --rm --pull never mnist demonstrar --indices 0 1 2 3 4 8 --sem-exibir
+
+No Docker, a demonstracao imprime as previsoes no terminal. Os graficos do
+treinamento podem ser abertos normalmente pela pasta resultados no PC.
+
+OUTROS COMANDOS (opcionais)
+
+Treinar somente uma arquitetura:
+docker compose run --rm --pull never mnist treinar --camadas 64 32 --taxa 0.01 --epocas 20 --lote 64 --semente 42
+
+Alterar os parametros dos seis experimentos:
+docker compose run --rm --pull never mnist experimentos --configuracoes configuracoes.json --epocas 20 --lote 64 --semente 42
+
+Executar os testes:
+docker compose run --rm --pull never mnist testar
+
+Verificar os gradientes:
+docker compose run --rm --pull never mnist verificar-gradientes
+
+Consultar as opcoes:
+docker compose run --rm --pull never mnist --help
+
+Alternativa COM INTERNET no PC do amigo, sem transportar o TAR:
+docker compose build
+docker compose run --rm --pull never mnist
+
+Para atualizar codigo ou bibliotecas, refaca o build e a exportacao do TAR.

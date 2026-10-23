@@ -1,0 +1,7 @@
+.venv/
+__pycache__/
+*.pyc
+dados/*.npz
+dados/*.part
+resultados/
+ia-mlp-mnist*.tar
